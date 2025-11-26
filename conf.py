@@ -13,7 +13,7 @@ author = "NGFF Community"
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser","sphinx_reredirects"]
+extensions = ["myst_parser", "sphinx_reredirects"]
 source_suffix = [".rst", ".md"]
 myst_heading_anchors = 5
 myst_enable_extensions = ["deflist", "strikethrough"]
@@ -33,10 +33,10 @@ exclude_patterns = [
 ]
 
 redirects = {
-     "tools/index": "../resources/tools/index.html",
-     "publications/index": "../resources/publications/index.html",
-     "data/index": "../resources/data/index.html",
-     "about/index": "../index.html"
+    "tools/index": "../resources/tools/index.html",
+    "publications/index": "../resources/publications/index.html",
+    "data/index": "../resources/data/index.html",
+    "about/index": "../index.html",
 }
 
 # -- Options for HTML output -------------------------------------------------
@@ -55,14 +55,11 @@ html_js_files = [
     "main.js",
 ]
 
-html_extra_path = [
-    "_bikeshed",
-]
+html_extra_path = ["_bikeshed", "specs_test"]
 
 # ####################################
 # Post-process all versions
 # ####################################
-
 
 
 from pathlib import Path
@@ -149,14 +146,10 @@ def gen_version(version):
         )
 
     schema_fnames = [
-        p
-        for p in sorted(schema_path.glob("*.html"))
-        if p.name != "index.html"
+        p for p in sorted(schema_path.glob("*.html")) if p.name != "index.html"
     ]
     with open(schema_path / "index.html", "w") as f:
-        f.write(
-            get_version_index_html(version=version, schmea_fnames=schema_fnames)
-        )
+        f.write(get_version_index_html(version=version, schmea_fnames=schema_fnames))
 
 
 def post_process():
@@ -186,7 +179,8 @@ def post_process():
 
         if run_bikeshed:
             subprocess.check_call(
-                f"bikeshed spec {index_file} {output_file}", shell=True,
+                f"bikeshed spec {index_file} {output_file}",
+                shell=True,
             )
 
         if os.path.exists(target_dir):
