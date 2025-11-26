@@ -55,8 +55,14 @@ html_js_files = [
     "main.js",
 ]
 
-html_extra_path = ["_bikeshed", "specs_test"]
+import os
 
+BASE_DIR = os.path.dirname(__file__)
+
+html_extra_path = [
+    os.path.join(BASE_DIR, "_bikeshed"),
+    os.path.join(BASE_DIR, "specs_test"),
+]
 # ####################################
 # Post-process all versions
 # ####################################
